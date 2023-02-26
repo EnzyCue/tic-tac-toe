@@ -1,8 +1,9 @@
 
 const player = (name, symbol) => {
     const getName = () => name;
+    const setName = (newName) => name = newName;
     const getSymbol = () => symbol;
-    return {getName, getSymbol};
+    return {getName, getSymbol, setName};
 }
 
 function boardInteract(board, player, button){
@@ -56,10 +57,40 @@ function render(board) {
     }
 }
 
-function finishGame(winner){
-    console.log(winner);
+function disableAllBoardButtons(){
+    let boardButtonsAll = document.querySelectorAll('.board-button');
+    boardButtonsAll.forEach(boardButton => {
+        boardButton.disabled = true;
+    });
+}
 
-    //do something to end the game
+function finishGame(winner, player){
+    console.log(winner);
+    disableAllBoardButtons();
+
+    let announcement = document.querySelector('.announcement');
+    if (winner === 'draw'){
+        announcement.textContent = 'Draw';
+        
+    } else {
+        announcement.textContent = `${player.getName()} is the winner!`;
+    }
+    announcement.style.visibility = 'visible';
+}
+
+function setupNamesButton(playerX, playerO){
+    let namesButton = document.querySelector('.insert-name');
+    namesButton.addEventListener('click', () => {
+        playerX.setName(prompt('Name of player (X): ','Player1'));
+        playerO.setName(prompt('Name of player (O): ','Player2'));
+    });
+}
+
+function enableBoardButtons(){
+    let boardButtonsAll = document.querySelectorAll('.board-button');
+    boardButtonsAll.forEach(boardButton => {
+        boardButton.disabled = false;
+    });
 }
 
 function run() {
@@ -69,15 +100,19 @@ function run() {
         return gameBoard;
     })();
 
-    const playerX = player('player1', 'X');
-    const playerO = player('player2', 'O');
+    render(gameBoard);
+
+    const playerX = player('X-Player','X');
+    const playerO = player('O-Player','O');
+
+    setupNamesButton(playerX, playerO);
+    setupPlayButton();
 
     let currentPlayer = playerX;
 
-    render(gameBoard);
-    buttonSetup();
+    boardButtonSetup();
 
-    function buttonSetup(){
+    function boardButtonSetup(){
         let boardButtonsAll = document.querySelectorAll('.board-button');
         boardButtonsAll.forEach(boardButton => {
             boardButton.addEventListener('click', () => {
@@ -87,7 +122,7 @@ function run() {
                 let result = boardStateChecker(gameBoard);
 
                 if (result) {
-                    finishGame(result);
+                    finishGame(result, currentPlayer);
                 }
 
                 currentPlayer = (currentPlayer === playerX) ? playerO : playerX;
@@ -96,6 +131,19 @@ function run() {
         });
 
     };
+
+    function setupPlayButton(){
+        let playButton = document.querySelector('.play');
+        let announcement = document.querySelector('.announcement');
+        playButton.addEventListener('click', () => {
+            enableBoardButtons();
+            for(let i = 0; i < 9; ++i) {
+                gameBoard[i] = '?';
+            }
+            render(gameBoard);
+            announcement.style.visibility = 'hidden';
+        });
+    }
 };
 
 run();

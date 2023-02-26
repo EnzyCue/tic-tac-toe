@@ -12,6 +12,7 @@ body {
     align-items: center;
     justify-content: center;
     min-width: 48rem;
+    position: relative;
 }
 
 h1{
@@ -40,8 +41,14 @@ h1{
     color: white;
 }
 .board-button:disabled{
+    background: white;
     color: white;
 }
+.board-button:hover{
+    background: white;
+    color: white;
+}
+  
 /* add a border to the top row */
 .board-button:first-child,
 .board-button:nth-child(2),
@@ -68,6 +75,40 @@ border-left: 8px solid #ababab;
 .board-button:nth-child(6),
 .board-button:nth-child(9) {
 border-right: 8px solid #ababab;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    gap: 3rem;
+}
+.container button{
+    background: #1e293b;
+    color: white;
+    border: 10px solid #ababab;
+    border-radius: 20px;
+    width: 25rem;
+    height: 5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top:0.5rem ;
+}
+.container button:hover{
+    background: white;
+    color: #1e293b;
+}
+.announcement{
+    position: absolute;
+    top: 30rem;
+    background-color: #ababab;
+    font-size: 5rem;
+    font-weight: 900;
+    border-radius: 50px;
+    padding: 4rem;
+    text-align: center;
+    border: 10px solid black;
+    visibility: hidden;
 }
   
   
