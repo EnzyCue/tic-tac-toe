@@ -37,6 +37,10 @@ h1{
     background-color: #6b6b6b;
     font-size: 13rem;
     font-weight: 900;
+    color: white;
+}
+.board-button:disabled{
+    color: white;
 }
 /* add a border to the top row */
 .board-button:first-child,
