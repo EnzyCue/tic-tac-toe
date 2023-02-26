@@ -22,7 +22,7 @@ h1{
 }
 
 .board {
-    background-color: #1e293b;border: 4px solid #ababab;
+    background-color: #1e293b;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -38,3 +38,33 @@ h1{
     font-size: 13rem;
     font-weight: 900;
 }
+/* add a border to the top row */
+.board-button:first-child,
+.board-button:nth-child(2),
+.board-button:nth-child(3) {
+border-top: 8px solid #ababab;
+}
+
+/* add a border to the bottom row */
+.board-button:nth-last-child(3),
+.board-button:nth-last-child(2),
+.board-button:last-child {
+border-bottom: 8px solid #ababab;
+}
+
+/* add a border to the left column */
+.board-button:nth-child(1),
+.board-button:nth-child(4),
+.board-button:nth-child(7) {
+border-left: 8px solid #ababab;
+}
+
+/* add a border to the right column */
+.board-button:nth-child(3),
+.board-button:nth-child(6),
+.board-button:nth-child(9) {
+border-right: 8px solid #ababab;
+}
+  
+  
+  
